@@ -16,7 +16,7 @@ export default () =>{
 
     const renderThings = () =>{
        return(
-        things.map((t) => <h2 key={t.id}>{t.name}</h2>)
+        things.map((t) => <h4 key={t.id}>{t.name}</h4>)
        ) 
     }
 
