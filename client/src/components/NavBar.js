@@ -1,11 +1,29 @@
+// import { useState } from "react"
 import { Link } from "react-router-dom"
+// import { Menu } from "semantic-ui-react"
 
 export default () =>{
-    return(
-         <div>
-             <Link to="/">Home</Link>
-             <Link to="/things">Things</Link>
+    // const [activeItem, setActiveItem] = useState();
 
-         </div>
+    // const handleClick = (e,{name})=>setActiveItem(name); 
+
+    return(
+       <>
+        
+            <Link to='/'>Home</Link>
+                {/* <Menu.Item
+                name='home'
+                active={activeItem === 'home'}
+                onClick={handleClick}
+                /> */}
+            
+
+            <Link to='/departments'>Departments</Link>
+                {/* <Menu.Item
+                name='departments'
+                active={activeItem === 'departments'}
+                onClick={handleClick}
+                /> */}
+        </>
     ) 
  }
