@@ -12,7 +12,7 @@ export default ()=>{
     const readDepartments = async () =>{
         try{
             let res = await Axios.get('/api/departments');
-            setDepartments(dummyDepartment);
+            setDepartments(res.data);
         }catch(err){
             console.log(err);
         }
