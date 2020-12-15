@@ -8,5 +8,17 @@
 require 'faker'
 
 10.times do
-    Thing.create(name: Faker::Ancient.unique.god)
+   Department.create(
+       name: Faker::Commerce.department
+       )
+   
+   
+   25.times do
+    Item.create(
+        name: Faker::Commerce.product_name, 
+        description: Faker::TvShows::MichaelScott.quote, 
+        price:  Faker::Commerce.price  
+        )
+    end
 end
+puts "seeded"
