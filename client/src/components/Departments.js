@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import {Container, Header} from 'semantic-ui-react';
 import Axios from 'axios';
 
-
+//dummy data to test call
 let dummyDepartment = [{name: "test"}];
 
 export default ()=>{
 
     const [departments, setDepartments] = useState([]);
 
+    //axios call to grab the departments
     const readDepartments = async () =>{
         try{
             let res = await Axios.get('/api/departments');
@@ -22,6 +23,7 @@ export default ()=>{
         readDepartments();
     },[])
 
+    //rendering the departments
     const renderDepartments = () =>{
         return(
             departments.map((d)=>{
