@@ -1,11 +1,14 @@
+import Axios from 'axios';
 import {useState} from 'react';
 import { Form } from 'semantic-ui-react';
 
-export default (props) =>{
+export default ({addDepartment}) =>{
     const [name, setName] = useState('');
 
     const handleSubmit = (e) =>{
-        props.addDepartment({name});
+        e.preventDefault();
+        Axios.post(`/api/departments`,{name: name})
+        .then((res) => addDepartment(res.data));
         setName('');
     }
 

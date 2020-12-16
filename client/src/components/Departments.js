@@ -22,7 +22,7 @@ export default ()=>{
     }
 
     //add a department
-    const addDepartment = async (department)=>{
+    const addDepartment = (department)=>{
        setDepartments([...departments, department]);
     }
 
@@ -33,13 +33,9 @@ export default ()=>{
 
     //rendering the departments
     const renderDepartments = () =>{
-        return(
-            departments.map((d)=>{
-                return(
-                    <Header key={d.id}>{d.name}</Header>
-                ) 
-            })
-        )
+        return departments.map((d)=>(
+            <Header key={d.id}>{d.name}</Header>
+        ));
     }
 
     return(
