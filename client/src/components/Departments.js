@@ -26,6 +26,19 @@ export default ()=>{
        setDepartments([...departments, department]);
     }
 
+    //update a department
+    const updateDepartment = async (id, department)=>{
+        try{
+            let res = await Axios.put(`/api/departments/${id}`, department);
+            let newDepartments = departments.map((d)=>
+                d.id !== id ? d : res.data
+            )
+            setDepartments(newDepartments)
+        }catch(err){
+            console.log(err);
+        }
+    };
+
     //delete a department
     const deleteDepartment = async (id) =>{
         try{
