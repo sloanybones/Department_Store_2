@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import {Container, Header} from 'semantic-ui-react';
+import {Button, Container, Header} from 'semantic-ui-react';
 import Axios from 'axios';
+import DepartmentForm from './DepartmentForm';
 
 //dummy data to test call
 let dummyDepartment = [{name: "test"}];
@@ -8,6 +9,7 @@ let dummyDepartment = [{name: "test"}];
 export default ()=>{
 
     const [departments, setDepartments] = useState([]);
+    const [showDepForm, setShowDepForm] = useState(false);
 
     //axios call to grab the departments
     const readDepartments = async () =>{
@@ -18,6 +20,12 @@ export default ()=>{
             console.log(err);
         }
     }
+
+    //add a department
+    const addDepartment = async (department)=>{
+       setDepartments([...departments, department]);
+    }
+
 
     useEffect(()=>{
         readDepartments();
@@ -37,6 +45,8 @@ export default ()=>{
     return(
         <Container>
             <Header as="h1">Departments</Header>
+            {showDepForm && <DepartmentForm addDepartment={addDepartment}/>}
+            <Button onClick={()=> setShowDepForm(!showDepForm)}>{showDepForm ? "Cancel" : "Create Department"}</Button>
             {renderDepartments()}
         </Container>
     )
