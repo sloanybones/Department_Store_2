@@ -26,6 +26,16 @@ export default ()=>{
        setDepartments([...departments, department]);
     }
 
+    //delete a department
+    const deleteDepartment = async (id) =>{
+        try{
+            let res = await Axios.delete(`/api/departments/${id}`);
+            let newDepartment = departments.filter((d)=> d.id !== res.data.id);
+            setDepartments(newDepartment);
+        }catch(err){
+            console.log(err);
+        }
+    };
 
     useEffect(()=>{
         readDepartments();
@@ -33,9 +43,15 @@ export default ()=>{
 
     //rendering the departments
     const renderDepartments = () =>{
-        return departments.map((d)=>(
-            <Header key={d.id}>{d.name}</Header>
-        ));
+        return departments.map((d)=>{
+            return(
+                <>
+                <Header key={d.id}>{d.name}</Header> 
+                <Button size="mini" icon="x" color="red" onClick={()=>deleteDepartment(d.id)}/>
+                </>
+            )
+            
+            });
     }
 
     return(
