@@ -31,4 +31,4 @@ export default ({addDepartment, updateDepartment, department, hideEditForm}) =>{
             <Form.Button type="submit" color="green">add</Form.Button>
         </Form>
     )
-}
+        }
