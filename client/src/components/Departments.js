@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {Button, Container, Header} from 'semantic-ui-react';
 import Axios from 'axios';
 import DepartmentForm from './DepartmentForm';
+import Department from './Department';
 
 //dummy data to test call
 let dummyDepartment = [{name: "test"}];
@@ -27,9 +28,9 @@ export default ()=>{
     }
 
     //update a department
-    const updateDepartment = async (id, department)=>{
+    const updateDepartment = async (id, name)=>{
         try{
-            let res = await Axios.put(`/api/departments/${id}`, department);
+            let res = await Axios.put(`/api/departments/${id}`, {name: name});
             let newDepartments = departments.map((d)=>
                 d.id !== id ? d : res.data
             )
@@ -56,16 +57,12 @@ export default ()=>{
 
     //rendering the departments
     const renderDepartments = () =>{
-        return departments.map((d)=>{
-            return(
-                <>
-                <Header key={d.id}>{d.name}</Header> 
-                <Button size="mini" icon="x" color="red" onClick={()=>deleteDepartment(d.id)}/>
-                </>
-            )
-            
-            });
+        return departments.map((department)=>(
+            <Department key={department.id} department={department} deleteDepartment={deleteDepartment} updateDepartment={updateDepartment}/>
+        ));
     }
+
+    
 
     return(
         <Container>

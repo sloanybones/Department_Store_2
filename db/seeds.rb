@@ -7,18 +7,19 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-10.times do
-   Department.create(
+10.times do 
+   department = Department.create(
        name: Faker::Commerce.department
        )
    
    
    25.times do
-    Item.create(
+    department.items.create(
         name: Faker::Commerce.product_name, 
         description: Faker::TvShows::MichaelScott.quote, 
         price:  Faker::Commerce.price  
         )
     end
 end
-puts "seeded"
+
+
