@@ -2,13 +2,20 @@ import Axios from 'axios';
 import {useState} from 'react';
 import { Form } from 'semantic-ui-react';
 
-export default ({addDepartment}) =>{
-    const [name, setName] = useState('');
+export default ({addDepartment, updateDepartment, department, hideEditForm}) =>{
+    const [name, setName] = useState(department ? department.name : '');
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        Axios.post(`/api/departments`,{name: name})
+        if(department){
+            updateDepartment(department.id, name)
+            hideEditForm();
+        }
+        else{
+            Axios.post(`/api/departments`,{name: name})
         .then((res) => addDepartment(res.data));
+        }
+        
         setName('');
     }
 
