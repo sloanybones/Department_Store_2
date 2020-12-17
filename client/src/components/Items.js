@@ -77,8 +77,6 @@ return (
   <>
   <h1>These are items</h1>
     {renderItems()}
-  {/* <Button onClick={renderItems()}> 
-  {renderItems()} */}
  </>
 );
 
