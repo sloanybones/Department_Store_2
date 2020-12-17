@@ -1,20 +1,27 @@
-import React from 'react';
+import Axios from 'axios';
+import React, { useState } from 'react';
+import { List, Container, Card, Button } from 'semantic-ui-react';
+import ItemForm from './ItemForm';
 
-const Item = ({ department}) => {
-  return "hello";
+const Item = ({ item, deleteItem, updateItem, department }) => {
 
-  {/* <>
+  const [showForm, setShowForm] = useState(false);
 
-      /* key={department.id}
-      {props.department.name}
-    <ul>
-      {item.name}
-       {item.description}
-      {item.price}
-     </ul>
-  </>
- }
-   */}
+  return (
+      <>
+      
+        <Card>
+            {item.name}
+            <br ></br>
+            {item.description}
+            <br ></br>
+            ${item.price}
+            <span><Button icon='trash' color='red' onClick = {() => deleteItem(item.id)}></Button>
+            <Button icon='pencil' color='blue' onClick = {() => setShowForm(!showForm)}></Button></span>
+        </Card>
+        {showForm && <ItemForm updateItem={updateItem} department={department}/>}
+      </>
+  )
 }
 
 export default Item;
