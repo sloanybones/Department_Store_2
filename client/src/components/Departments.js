@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import {Button, Container, Header} from 'semantic-ui-react';
 import Axios from 'axios';
 import DepartmentForm from './DepartmentForm';
+import Department from  "./Department"
+
 
 //dummy data to test call
 let dummyDepartment = [{name: "test"}];
@@ -54,17 +56,11 @@ export default ()=>{
         readDepartments();
     },[])
 
-    //rendering the departments
-    const renderDepartments = () =>{
-        return departments.map((d)=>{
-            return(
-                <>
-                <Header key={d.id}>{d.name}</Header> 
-                <Button size="mini" icon="x" color="red" onClick={()=>deleteDepartment(d.id)}/>
-                </>
-            )
-            
-            });
+     //rendering the departments
+     const renderDepartments = () =>{
+        return departments.map((department)=>(
+            <Department key={department.id} department={department} deleteDepartment={deleteDepartment} updateDepartment={updateDepartment}/>
+        ));
     }
 
     return(
