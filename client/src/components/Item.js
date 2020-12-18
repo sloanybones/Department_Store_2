@@ -9,7 +9,6 @@ const Item = ({ item, deleteItem, updateItem, department }) => {
 
   return (
       <>
-      
         <Card>
             {item.name}
             <br ></br>
