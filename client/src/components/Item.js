@@ -1,7 +1,9 @@
 import Axios from 'axios';
 import React, { useState } from 'react';
-import { List, Container, Card, Button } from 'semantic-ui-react';
+import { List, Container, Card, Button, Grid, Segment } from 'semantic-ui-react';
 import ItemForm from './ItemForm';
+import { Header } from './styles/Headers';
+import styled from 'styled-components'
 
 const Item = ({ item, deleteItem, updateItem, department }) => {
 
@@ -9,19 +11,30 @@ const Item = ({ item, deleteItem, updateItem, department }) => {
 
   return (
       <>
-      
-        <Card>
-            {item.name}
-            <br ></br>
+      <Grid.Column>
+      <StyledCard>
+          <Header>
+            <Card.Header style={{textAlign: "center"}}>{item.name}</Card.Header>
+          </Header>
+            <Card.Description style={{textAlign: "center"}}>
             {item.description}
+            </Card.Description>
             <br ></br>
-            ${item.price}
-            <span><Button icon='trash' color='red' onClick = {() => deleteItem(item.id)}></Button>
-            <Button icon='pencil' color='blue' onClick = {() => setShowForm(!showForm)}></Button></span>
-        </Card>
+            <Card.Meta style={{textAlign: "center", paddingBottom: "5%"}}>${item.price}</Card.Meta>
+            <span style={{textAlign: "center"}}>
+            <Button icon='trash' color='red' onClick = {() => deleteItem(item.id)}/>
+            <Button icon='pencil' color='blue' onClick = {() => setShowForm(!showForm)}/>
+            </span>
+        </StyledCard>
+
+      </Grid.Column>
         {showForm && <ItemForm item={item} updateItem={updateItem} department={department} hideEditForm={()=>setShowForm(false)}/>}
       </>
   )
 }
-
 export default Item;
+
+const StyledCard = styled(Card)`
+    // height: 250px !important;
+    margin: 5% 0 !important;
+`;

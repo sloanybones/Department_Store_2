@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import { useEffect, useState, } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, Container } from 'semantic-ui-react';
+import { Button, Container, Grid } from 'semantic-ui-react';
 import Item from "./Item";
 import ItemForm from './ItemForm';
 
@@ -65,8 +65,12 @@ return (
     <h1>Here are our items</h1>
     {/* <Button onClick = {() => addItem()}>Add an item</Button> */}
     <ItemForm department={match.params.id} addItem={addItem} />
-
-      {renderItems()}
+      <Grid columns={4}>
+        <Grid.Row>
+          {renderItems()}
+        </Grid.Row>
+      </Grid>
+     
   </Container>
  </>
 );

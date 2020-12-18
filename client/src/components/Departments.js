@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import {Button, Container, Header} from 'semantic-ui-react';
+import {Button, Container, Grid, Header} from 'semantic-ui-react';
 import Axios from 'axios';
 import DepartmentForm from './DepartmentForm';
 import Department from './Department';
+import { Title } from './styles/Headers';
 
 //dummy data to test call
 let dummyDepartment = [{name: "test"}];
@@ -58,7 +59,10 @@ export default ()=>{
     //rendering the departments
     const renderDepartments = () =>{
         return departments.map((department)=>(
-            <Department key={department.id} department={department} deleteDepartment={deleteDepartment} updateDepartment={updateDepartment}/>
+            <Grid.Column style={{padding: "1% 0"}}>
+                <Department key={department.id} department={department} deleteDepartment={deleteDepartment} updateDepartment={updateDepartment}/>
+            </Grid.Column>
+            
         ));
     }
 
@@ -66,10 +70,14 @@ export default ()=>{
 
     return(
         <Container>
-            <Header as="h1">Departments</Header>
-            {showDepForm && <DepartmentForm addDepartment={addDepartment}/>}
+            <Title>Departments</Title>
+            {showDepForm && <DepartmentForm addDepartment={addDepartment} style={{paddingBottom: "5%"}}/>}
             <Button onClick={()=> setShowDepForm(!showDepForm)}>{showDepForm ? "Cancel" : "Create Department"}</Button>
-            {renderDepartments()}
+            <Grid columns={4}>
+                <Grid.Row style={{padding: "7% 0"}}>
+                {renderDepartments()}
+                </Grid.Row>
+            </Grid>
         </Container>
     )
 }
