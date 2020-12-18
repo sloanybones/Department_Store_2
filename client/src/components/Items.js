@@ -1,8 +1,9 @@
 import Axios from 'axios';
 import { useEffect, useState, } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
+import { Button, Container } from 'semantic-ui-react';
 import Item from "./Item";
+import ItemForm from './ItemForm';
 
 
 const Items = ({match}) => {
@@ -28,34 +29,50 @@ const Items = ({match}) => {
 },[])
 
 
-  // const readSingleItem = async (itemId) => {
-  //   try {
-  //     let res = await Axios.get(
-  //       `/api/departments/${departmentId}/items/${itemId}`
-  //     );
-  //     console.log(res.data);
-  //   } catch (err) {}
-  // };
+  const addItem = async (item) => {
+    setItems([...items, item]);
+  };
 
-  // const addItem = async (item) => {
-  //   try {
-  //     let res = await Axios.post(`/api/departments/${departmentId}/items`, item);
-  //     console.log(res.data);
-  //   } catch (err) {}
-  // };
+  const deleteItem = async (id) =>{
+    try{
+        let res = await Axios.delete(`/api/departments/${match.params.id}/items/${id}`);
+        let newItem = items.filter((item)=> item.id !== res.data.id);
+        setItems(newItem);
+    }catch(err){
+        console.log(err);
+    }
+};
 
-  // const updateItem = async (id, item) => {
-  //   try {
-  //     let res = await Axios.put(
-  //       `/api/departments/${departmentId}/items/${id}, item`
-  //     );
-  //     console.log(res.data)
-  //   } catch (err) {}
-  // };
+const updateItem = (item) => {
+  let newItems = items.map((i)=>
+                i.id !== item.id ? i : item
+            )
+            setItems(newItems);
+};
+  
 
   const renderItems = (props) => {
-    return items.map((item) => {
-      return (
+    return items.map((item) => (
+        <Item key={item.id} item={item} deleteItem={deleteItem} updateItem={updateItem} department={match.params.id} />
+      )
+    );
+
+  };
+
+return (        
+  <>
+  <Container>
+    <h1>Here are our items</h1>
+    {/* <Button onClick = {() => addItem()}>Add an item</Button> */}
+    <ItemForm department={match.params.id} addItem={addItem} />
+
+      {renderItems()}
+  </Container>
+ </>
+);
+
+} 
+       {/*
         <>
         <ul>
         {item.name}
@@ -64,24 +81,8 @@ const Items = ({match}) => {
         <br ></br>
         ${item.price}
         </ul>
-          {/* <Item key={id}></Item> */}
-        </>
-      )
-
-      }
-    )
-
-  };
-
-return (        
-  <>
-  <h1>These are items</h1>
-    {renderItems()}
- </>
-);
-
-} 
-       {/*
+          {/* <Item key={id}></Item> 
+            </>
         */}
 
 
